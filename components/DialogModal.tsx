@@ -55,7 +55,7 @@ const DialogModal: React.FC<{
           left: '50%',
           top: '40%',
           transform: 'translateX(-50%)', // 水平居中
-          width: 520,
+          width: 530,
           background: 'rgba(40,40,40,0.82)',
           color: '#fff',
           borderRadius: 20,
@@ -68,7 +68,7 @@ const DialogModal: React.FC<{
           overflow: 'visible',
         }}
       >
-        <div style={{ whiteSpace: 'pre-line', lineHeight: 1.8, paddingLeft: 60 }}>{dialogLines[index]}</div>
+        <div style={{ whiteSpace: 'pre-line', lineHeight: 1.8, paddingLeft: 90 }}>{dialogLines[index]}</div>
         <button
           style={{
             position: 'absolute',
