@@ -28,6 +28,14 @@ const LevelSelector: React.FC = () => {
   const prev = () => setCurrent((current - 1 + levels.length) % levels.length);
   const next = () => setCurrent((current + 1) % levels.length);
 
+  const handlePrev = () => {
+    prev();
+  };
+
+  const handleNext = () => {
+    next();
+  };
+
   return (
     <div style={{ textAlign: 'center', padding: 32 }}>
       <h2 style={{ fontWeight: 700, fontSize: 32, marginBottom: 32 }}>剧集选择</h2>
@@ -35,119 +43,138 @@ const LevelSelector: React.FC = () => {
         <Button
           shape="circle"
           icon={<LeftOutlined style={{ fontSize: 28, color: '#fff' }} />}
-          onClick={prev}
+          onClick={handlePrev}
           style={{
             width: 60,
             height: 60,
-            background: '#5c7342',
-            border: 'none',
+            background: '#4b6842',
+            border: '8px solid rgba(191,202,183,0.5)',
             boxShadow: '0 2px 8px #0002',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginRight: 32,
+            transition: 'background 0.2s, border 0.2s',
           }}
+          onMouseOver={e => (e.currentTarget.style.background = '#7fa97a')}
+          onMouseOut={e => (e.currentTarget.style.background = '#4b6842')}
+          onMouseDown={e => (e.currentTarget.style.background = '#46602e')}
+          onMouseUp={e => (e.currentTarget.style.background = '#7fa97a')}
         />
         <Card
           style={{
-            width: 520,
-            height: 440,
+            width: 440,
+            height: 260,
             background: '#f5f8f6',
             borderRadius: 24,
             boxShadow: '0 4px 24px #0001',
             transition: 'box-shadow 0.2s',
             display: 'flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            padding: 0
+            padding: 0,
+            position: 'relative',
           }}
           bodyStyle={{
             padding: 0,
             width: '100%',
             height: '100%',
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            background: 'none'
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            justifyContent: 'center',
+            background: 'none',
+            position: 'relative',
           }}
           hoverable
         >
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24 }}>
-            <img
-              src={levels[current].cover}
-              alt={levels[current].name}
+          {/* 预览+文字整体 */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 10, height: 184 }}>
+            {/* 地图预览图 */}
+            <div
               style={{
-                width: 400,
-                height: 220,
+                width: 200,
+                height: 144,
                 borderRadius: 16,
-                objectFit: 'cover',
+                overflow: 'hidden',
                 boxShadow: '0 2px 8px #0002',
-                marginBottom: 16,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 transition: 'transform 0.2s',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                marginLeft: 24,
+                marginRight: 32,
               }}
               onClick={() => router.push(`/scene/${levels[current].id}`)}
-              onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+              onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.08)')}
               onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
-            />
-            <div style={{ fontWeight: 700, fontSize: 20, marginBottom: 8 }}>{levels[current].name}</div>
-            <div style={{
-              color: '#333',
-              fontSize: 16,
-              marginBottom: 0,
-              lineHeight: 1.7,
-              minHeight: 60,
-              maxHeight: 80,
-              overflow: 'hidden',
-              display: '-webkit-box',
-              WebkitLineClamp: 4,
-              WebkitBoxOrient: 'vertical',
-              whiteSpace: 'pre-line',
-              textAlign: 'center',
-              width: 400
-            }}>{levels[current].desc}</div>
-          </div>
-          <div style={{ flex: 1 }} />
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', marginBottom: 24 }}>
-            <Button
-              type="primary"
-              size="large"
-              style={{
-                background: '#ffe066',
-                color: '#333',
-                border: 'none',
-                borderRadius: 24,
-                fontWeight: 'bold',
-                fontSize: 18,
-                boxShadow: '0 2px 8px #0001',
-                width: 180,
-                height: 44
-              }}
-              onClick={() => router.push(`/scene/${levels[current].id}`)}
-              onMouseOver={e => (e.currentTarget.style.background = '#ffec99')}
-              onMouseOut={e => (e.currentTarget.style.background = '#ffe066')}
             >
-              开始探索
-            </Button>
+              <img
+                src={levels[current].cover}
+                alt={levels[current].name}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: 16,
+                  transition: 'none',
+                }}
+              />
+            </div>
+            {/* 文字区 */}
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', paddingLeft: 0, paddingRight: 20 }}>
+              <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, textAlign: 'left', width: 160 }}>{levels[current].name}</div>
+              <div style={{ color: '#333', fontSize: 13, lineHeight: 1.7, textAlign: 'left', width: 160 }}>{levels[current].desc}</div>
+            </div>
           </div>
+          {/* 开始探索按钮，绝对定位于卡片底部居中 */}
+          <Button
+            type="primary"
+            size="large"
+            style={{
+              background: '#ffe066',
+              color: '#333',
+              border: 'none',
+              borderRadius: 24,
+              fontWeight: 'bold',
+              fontSize: 18,
+              boxShadow: '0 2px 8px #0001',
+              width: 180,
+              height: 44,
+              position: 'absolute',
+              left: '50%',
+              bottom: 10,
+              transform: 'translateX(-50%)',
+            }}
+            onClick={() => router.push(`/scene/${levels[current].id}`)}
+            onMouseOver={e => (e.currentTarget.style.background = '#ffec99')}
+            onMouseOut={e => (e.currentTarget.style.background = '#ffe066')}
+          >
+            开始探索
+          </Button>
         </Card>
         <Button
           shape="circle"
           icon={<RightOutlined style={{ fontSize: 28, color: '#fff' }} />}
-          onClick={next}
+          onClick={handleNext}
           style={{
             width: 60,
             height: 60,
-            background: '#5c7342',
-            border: 'none',
+            background: '#4b6842',
+            border: '8px solid rgba(191,202,183,0.5)',
             boxShadow: '0 2px 8px #0002',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginLeft: 32,
+            transition: 'background 0.2s, border 0.2s',
           }}
+          onMouseOver={e => (e.currentTarget.style.background = '#7fa97a')}
+          onMouseOut={e => (e.currentTarget.style.background = '#4b6842')}
+          onMouseDown={e => (e.currentTarget.style.background = '#46602e')}
+          onMouseUp={e => (e.currentTarget.style.background = '#7fa97a')}
         />
       </div>
     </div>

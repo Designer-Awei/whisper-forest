@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DialogModal from '../../components/DialogModal';
+import TopBar from '../../components/TopBar';
 
 /**
  * 森林场景页面
@@ -18,6 +19,7 @@ const ForestScene: React.FC = () => {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
+      <TopBar />
       {/* 正式场景内容（对话结束后显示） */}
       {!showDialog && (
         <div style={{ width: '100vw', height: '100vh', background: '#cde3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 32, color: '#333' }}>
