@@ -36,6 +36,15 @@ const TopBar: React.FC<{
   const [showSettings, setShowSettings] = useState(false);
   const [showBag, setShowBag] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  const getIconStyle = (key: string): React.CSSProperties => ({
+    ...iconStyle,
+    border: hovered === key ? '4px solid #ffe066' : iconStyle.border,
+    transform: hovered === key ? 'scale(1.12)' : 'scale(1)',
+    transition: 'box-shadow 0.2s, border 0.2s, transform 0.18s',
+    zIndex: 10,
+  });
 
   return (
     <>
@@ -43,16 +52,28 @@ const TopBar: React.FC<{
         <div style={{ width: '100vw', maxWidth: 990, aspectRatio: '1140/820', height: 'auto', position: 'relative', pointerEvents: 'none', display: 'flex' }}>
           {/* 左上角背包 */}
           <div style={{ position: 'absolute', left: 32, top: 32, pointerEvents: 'auto' }}>
-            <div style={iconStyle} onClick={() => setShowBag(true)}>
+            <div style={getIconStyle('bag')}
+              onClick={() => setShowBag(true)}
+              onMouseEnter={() => setHovered('bag')}
+              onMouseLeave={() => setHovered(null)}
+            >
               <img src="/assets/icon/背包.ico" alt="背包" style={{ width: 28, height: 28 }} />
             </div>
           </div>
           {/* 右上角通知和设置 */}
           <div style={{ position: 'absolute', right: 32, top: 32, display: 'flex', gap: 24, pointerEvents: 'auto' }}>
-            <div style={iconStyle} onClick={() => setShowNotify(true)}>
+            <div style={getIconStyle('notify')}
+              onClick={() => setShowNotify(true)}
+              onMouseEnter={() => setHovered('notify')}
+              onMouseLeave={() => setHovered(null)}
+            >
               <img src="/assets/icon/通知.ico" alt="通知" style={{ width: 28, height: 28 }} />
             </div>
-            <div style={iconStyle} onClick={() => setShowSettings(true)}>
+            <div style={getIconStyle('settings')}
+              onClick={() => setShowSettings(true)}
+              onMouseEnter={() => setHovered('settings')}
+              onMouseLeave={() => setHovered(null)}
+            >
               <img src="/assets/icon/设置.ico" alt="设置" style={{ width: 28, height: 28 }} />
             </div>
           </div>
