@@ -37,7 +37,16 @@ const LevelSelector: React.FC = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: 32 }}>
+    <div style={{
+      minHeight: '100vh',
+      width: '100vw',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      background: '#ffffff',
+    }}>
       <h2 style={{ fontWeight: 700, fontSize: 32, marginBottom: 32 }}>剧集选择</h2>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Button
@@ -76,16 +85,18 @@ const LevelSelector: React.FC = () => {
             padding: 0,
             position: 'relative',
           }}
-          bodyStyle={{
-            padding: 0,
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            background: 'none',
-            position: 'relative',
+          styles={{
+            body: {
+              padding: 0,
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+              justifyContent: 'center',
+              background: 'none',
+              position: 'relative',
+            }
           }}
           hoverable
         >

@@ -49,7 +49,7 @@ const TopBar: React.FC<{
   return (
     <>
       <div style={{ position: 'fixed', left: 0, top: 0, width: '100vw', height: '100vh', zIndex: 2001, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ width: '100vw', maxWidth: 990, aspectRatio: '1140/820', height: 'auto', position: 'relative', pointerEvents: 'none', display: 'flex' }}>
+        <div style={{ width: '100vw', maxWidth: 1100, aspectRatio: '1140/820', height: 'auto', position: 'relative', pointerEvents: 'none', display: 'flex' }}>
           {/* 左上角背包 */}
           <div style={{ position: 'absolute', left: 32, top: 32, pointerEvents: 'auto' }}>
             <div style={getIconStyle('bag')}
